@@ -1,0 +1,55 @@
+<!--
+  Description: index
+
+  User: c332030
+  Version 1.0
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <script src="ela-js.js"></script>
+
+  <script>
+
+    function getELA(quality, scale) {
+      let imageToProcess = document.getElementById("imageToProcess");
+      let elaImage = document.getElementById("elaImage");
+      let parentContainer = document.getElementById("analyzer");
+
+      ELA.processImg(parentContainer, imageToProcess, quality, scale, (resultDataURL) => {
+        elaImage.src = resultDataURL;
+      });
+    }
+
+    function updateImage(){
+
+      const image = document.getElementById("image");
+      const imageToProcess = document.getElementById("imageToProcess");
+
+      const fr = new FileReader();
+      fr.onload = function () {
+        imageToProcess.src = fr.result;
+      }
+      fr.readAsDataURL(image.files[0]);
+
+    }
+
+  </script>
+
+</head>
+<body>
+
+  <input id="image" type="file" onchange="updateImage()">
+
+  <div id="analyzer">
+    <img id="imageToProcess" src="image.jpeg" />
+    <img id="elaImage" />
+  </div>
+
+  <button type="button" onclick="getELA()">校验</button>
+
+</body>
+</html>
