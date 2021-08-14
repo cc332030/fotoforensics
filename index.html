@@ -10,46 +10,46 @@
   <meta charset="UTF-8">
   <title>Title</title>
 
-  <script src="ela-js.js"></script>
+  <style>
 
+    body {
+
+      width: 100vw;
+      height: 100vh;
+    }
+
+    #analyzer {
+
+      display: flex;
+      flex-direction: row;
+
+    }
+
+    .image {
+
+      flex: 1;
+
+      width: 50vw;
+
+    }
+
+  </style>
+
+  <script src="ela-js.js" defer></script>
   <script>
-
-    function getELA(quality, scale) {
-      let imageToProcess = document.getElementById("imageToProcess");
-      let elaImage = document.getElementById("elaImage");
-      let parentContainer = document.getElementById("analyzer");
-
-      ELA.processImg(parentContainer, imageToProcess, quality, scale, (resultDataURL) => {
-        elaImage.src = resultDataURL;
-      });
-    }
-
-    function updateImage(){
-
-      const image = document.getElementById("image");
-      const imageToProcess = document.getElementById("imageToProcess");
-
-      const fr = new FileReader();
-      fr.onload = function () {
-        imageToProcess.src = fr.result;
-      }
-      fr.readAsDataURL(image.files[0]);
-
-    }
-
+    window.debug = console.debug;
   </script>
+  <script src="index.js" defer></script>
 
 </head>
 <body>
 
-  <input id="image" type="file" onchange="updateImage()">
+  <input id="image" type="file" onchange="index.selectImage()">
 
-  <div id="analyzer">
-    <img id="imageToProcess" src="image.jpeg" />
-    <img id="elaImage" />
+  <div id="analyzer" >
+    <img id="imageToProcess" class="image" />
+    <img id="elaImage" class="image" />
   </div>
-
-  <button type="button" onclick="getELA()">校验</button>
 
 </body>
 </html>
